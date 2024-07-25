@@ -1,61 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title></title>
-    <style>
-        body {
-            background-color: #010A18;
-            text-align: center;
-        }
+  <meta charset="utf-8">
+  <title></title>
+  <style>
+      body {
+        background-color: #010A18;
+        text-align: center;
+      }
+      
+      .lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 840px;
+  height: 840px;
+  margin: 8px;
+  border: 38px solid #A8CF45;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #A8CF45 transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
-        .lds-ring {
-            display: inline-block;
-            position: relative;
-            width: 80px; /* Ajusta el tamaño del spinner */
-            height: 80px;
-        }
-        .lds-ring div {
-            box-sizing: border-box;
-            display: block;
-            position: absolute;
-            width: 64px; /* Ajusta el ancho de los anillos */
-            height: 64px; /* Ajusta el alto de los anillos */
-            margin: 8px;
-            border: 8px solid #A8CF45;
-            border-radius: 50%;
-            animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-            border-color: #A8CF45 transparent transparent transparent;
-        }
-        /* ... (resto del código CSS de .lds-ring) ... */
-
-        .lds-ring .ring-text { /* Estilos para el texto "INNOVA" */
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 18px;  /* Tamaño de fuente inicial */
-            font-weight: bold;
-            color: white;
-        }
-
-        /* Ajuste de tamaño de fuente para pantallas más pequeñas */
-        @media (max-width: 400px) {
-            .lds-ring .ring-text {
-                font-size: 14px;
-            }
-        }
-    </style>
+  </style>
 </head>
 <body>
   <script>
-      // ... (Tu script JavaScript existente) ...
-  </script>
+    const AS_URL_BASE = "https://script.google.com/macros/s/AKfycbwHZW1Ta3Pztr0vu_JgKMjz8XAaQ6nxb3VVrWXb8YwhdKtqPsrAylMACclCobcC-n50/exec";
+    
+    var url = document.location.href;
+    var k = url.substr(url.lastIndexOf("k=")+2);
+    
+    if(k){
+      fetch(AS_URL_BASE+'?k='+k)
+      .then(r => r.text())
+      .then((r) => {
+        console.log(r);
+        //document.write(r);
+        if(r){
+          document.location.replace(r);
+        }
+      })
+      .catch(err => console.log(err))
+    }
 
-  <div class="lds-ring">
-      <div></div><div></div><div></div><div></div>
-      <div class="ring-text">INNOVA</div>
-  </div>
+  </script>
+  
+  <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+</body>
 
   
 </body>
